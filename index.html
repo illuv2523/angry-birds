@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Злые Птички</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-wrap">
+  <canvas id="game" width="1000" height="600"></canvas>
+
+  <div id="hud">
+    <div class="hud-item">Очки: <span id="score">0</span></div>
+    <div class="hud-item">Рекорд: <span id="best">0</span></div>
+    <div class="hud-item">Уровень: <span id="level">1</span></div>
+    <div class="hud-item">Птицы: <span id="birds">3</span></div>
+  </div>
+
+  <div id="overlay" class="hidden">
+    <div class="panel">
+      <h1 id="ov-title">Победа!</h1>
+      <p id="ov-text"></p>
+      <div class="buttons">
+        <button id="btn-restart" class="btn">Заново</button>
+        <button id="btn-next" class="btn primary">Далее</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="hint">Тяни птицу и отпусти для выстрела. Во время полёта — клик/тап для способности!</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

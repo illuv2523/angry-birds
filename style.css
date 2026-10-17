@@ -1,0 +1,185 @@
+/* ================= style.css ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 15%, #2b3a55 0%, #131a26 65%, #0a0e15 100%);
+  font-family: 'Segoe UI', 'Trebuchet MS', Tahoma, sans-serif;
+  color: #fff;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#game-wrap {
+  position: relative;
+  aspect-ratio: 1000 / 600;
+  width: min(96vw, 1000px, 156vh);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, .65),
+    0 0 0 3px rgba(255, 255, 255, .07),
+    0 0 0 8px rgba(0, 0, 0, .35);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+#hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 14px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hud-item {
+  background: rgba(8, 14, 24, .5);
+  border: 2px solid rgba(255, 255, 255, .16);
+  border-radius: 11px;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: clamp(11px, 1.55vw, 17px);
+  letter-spacing: .4px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .6);
+  white-space: nowrap;
+}
+
+#score  { color: #ffd75e; }
+#best   { color: #7ff0a0; }
+#level  { color: #9fd8ff; }
+#birds  { color: #ff9a8b; }
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 18, .74);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: opacity .3s ease;
+  padding: 20px;
+}
+
+#overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.panel {
+  width: min(460px, 92%);
+  background: linear-gradient(180deg, #26334a 0%, #1a2333 100%);
+  border: 2px solid rgba(255, 255, 255, .12);
+  border-radius: 20px;
+  padding: 28px 26px 24px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+  animation: pop .32s cubic-bezier(.2, 1.4, .5, 1);
+}
+
+@keyframes pop {
+  0%   { transform: scale(.8) translateY(18px); opacity: 0; }
+  100% { transform: scale(1) translateY(0);      opacity: 1; }
+}
+
+.panel h1 {
+  font-size: clamp(21px, 3.2vw, 30px);
+  margin-bottom: 12px;
+  letter-spacing: .5px;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, .5);
+}
+
+.panel p {
+  font-size: clamp(13px, 1.9vw, 16px);
+  line-height: 1.65;
+  color: #b9c8dd;
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1 1 130px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: clamp(13px, 1.9vw, 16px);
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: .4px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(180deg, #4a5b78 0%, #36445c 100%);
+  box-shadow: 0 5px 0 #232d3d, 0 8px 18px rgba(0, 0, 0, .35);
+  transition: transform .1s ease, box-shadow .1s ease, filter .15s ease;
+}
+
+.btn:hover { filter: brightness(1.12); }
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #232d3d, 0 3px 10px rgba(0, 0, 0, .35);
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, #5cc95c 0%, #3aa03a 100%);
+  box-shadow: 0 5px 0 #24761f, 0 8px 18px rgba(0, 0, 0, .35);
+}
+
+.btn.primary:active {
+  box-shadow: 0 1px 0 #24761f, 0 3px 10px rgba(0, 0, 0, .35);
+}
+
+#hint {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: rgba(8, 14, 24, .48);
+  border: 1px solid rgba(255, 255, 255, .12);
+  font-size: clamp(10px, 1.35vw, 13px);
+  color: #cfe2ff;
+  letter-spacing: .3px;
+  pointer-events: none;
+  z-index: 5;
+  animation: hintFade 9s ease forwards;
+  white-space: nowrap;
+}
+
+@keyframes hintFade {
+  0%, 70% { opacity: 1; }
+  100%    { opacity: 0; }
+}
